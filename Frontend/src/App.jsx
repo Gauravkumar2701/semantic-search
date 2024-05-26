@@ -32,9 +32,9 @@ function App() {
       </div>
 
       <div className="answer-list">
-        {data ? (
+        {data.length != 0  ? (
           data.map((item, index) => <div key={index}>{item.id}</div>)
-        ) : (
+        ) : ( 
           <p>No data to display.</p>
         )}
       </div>

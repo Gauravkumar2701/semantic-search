@@ -11,7 +11,8 @@
 }
 
 
-.answer-list{
+.answer-list{ 
   text-align: center;
   padding-top: 100px;
+  gap: 100px
 }

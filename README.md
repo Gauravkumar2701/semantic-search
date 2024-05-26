@@ -17,18 +17,24 @@ This web application is designed to query on the document alread upload on the d
 ### Running the application from source code
 
 ```bash
-# Clone the repo
-git clone repository-name
+# Clone the repository
+git clone repository-url
+
 # Change the directory
-cd repository-name
+cd semantic-search
+
 # Install all the requirements
 pip install -r requirements.txt
+
 # Run the fast api server
 fastapi dev main.py
+
 # To run frontend
 cd Frontend
+
 # install dependency
 npm install
+
 # Run the frontend
 npm run dev
 ```
@@ -38,15 +44,15 @@ npm run dev
 ### Running the code using the docker.
 
 ```bash
-
 # Clone the repository
 git clone repository-name
+
 # Changing the directory to code
 cd semantic-search
+
 # Building the docker image
-sudo docker build -t {image-name} .
-# For creating the container
-sudo docker run -it -d -p 8080:8080 --name container-name image-name
+sudo docker-compose up --build
+
 ```
 
 
@@ -54,10 +60,18 @@ sudo docker run -it -d -p 8080:8080 --name container-name image-name
 ### Using prebuild docker image from docker hub.
 
 ```bash
+# NOTE :- Here we need configure the network because frontend uses the backend as the host name to make call to the backend so we need make our backend with that name.
+
 # Pull the docker pre-build image from my account
-docker pull monster2701/semantic-search
-# Create a container from the image
-sudo docker run -it -d -p 8080:8080 --name container-name image-name
+docker pull monster2701/semantic-search-frontend
+docker pull monster2701/semantic-search-backend
+
+# Create a container from the frontend image
+sudo docker run -it -d -p 8080:8080 --name container-name image-name-frontend
+
+# Create a container from the backend image
+sudo docker run -it -d -p 8000:8000 --name container-name image-name-backend
+
 ```
 
 
