@@ -75,4 +75,76 @@ sudo docker run -it -d -p 8000:8000 --name container-name image-name-backend
 ```
 
 
+# Document Search API
 
+This API allows you to upload PDF documents, extract their text, generate embeddings, and perform search queries against the uploaded documents.
+
+## Endpoints
+
+### Upload Document
+
+Upload a PDF document to the server, extract its text, and generate an embedding.
+
+- **URL**: `/upload`
+- **Method**: `POST`
+- **Content-Type**: `multipart/form-data`
+- **Request Body**:
+  - `file`: PDF file to be uploaded.
+- **Responses**:
+  - `200 OK`: File uploaded successfully.
+    - **Content**:
+      ```json
+      {
+          "message": "File uploaded successfully"
+      }
+      ```
+  - `400 Bad Request`: Error occurred during file upload.
+    - **Content**:
+      ```json
+      {
+          "detail": "Error message"
+      }
+      ```
+
+#### Example Request
+```bash
+curl -X POST "http://localhost:8000/upload" -F "file=@path/to/your/file.pdf"
+```
+
+### Search Documents
+
+**Method:** `GET`
+
+**Parameters:**
+
+- `q` (required, query string): The search query string to find relevant documents. You can use natural language to express your search intent.
+
+**Responses:**
+
+- **200 OK:** Search completed successfully.
+    - **Content:** A JSON response containing the search results. The structure of the response might vary depending on your implementation, but it typically includes:
+        - `results` (list): A list of dictionaries representing the retrieved documents. Each dictionary could contain fields like:
+            - `id` (optional, string): Unique identifier of the document (if applicable in your storage mechanism).
+            - `score` (float, optional): Relevance score of the document to the search query (if calculated in your search logic). This score helps prioritize results based on their match to the query.
+           
+
+**Example Response (Success):**
+
+```json
+{
+  "results": [
+    {
+      "filename": "my_document.pdf",
+      "score": 0.85,  // Optional relevance score
+      "metadata": {}
+    },
+    {
+      "filename": "another_document.pdf",
+      "score": 0.72,  // Optional relevance score
+    }
+  ]
+}
+
+```bash
+curl -X POST "http://localhost:8000/search?q={query that we have to do}"
+```
