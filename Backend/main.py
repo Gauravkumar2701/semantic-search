@@ -8,7 +8,6 @@ import os
 from fastapi.middleware.cors import CORSMiddleware
 from model import Document
 from utils import clean_text, extract_text_from_pdf
-from database import add_document, search_documents
 
 from dotenv import load_dotenv
 
@@ -53,6 +52,12 @@ if index_name not in pc.list_indexes().names():
     ) 
 
 app.state.index = pc.Index(index_name)
+
+
+
+@app.get("/docs")
+async def custom_docs():
+    return Response(content="This is my custom /docs endpoint", media_type="text/plain")
 
 
 @app.post("/upload")
