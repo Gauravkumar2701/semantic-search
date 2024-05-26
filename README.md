@@ -144,7 +144,9 @@ curl -X POST "http://localhost:8000/upload" -F "file=@path/to/your/file.pdf"
     }
   ]
 }
+```
 
+**Example Request:**
 ```bash
 curl -X POST "http://localhost:8000/search?q={query that we have to do}"
 ```
