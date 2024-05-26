@@ -1,0 +1,8 @@
+fastapi
+pdfminer.six
+sentence_transformers 
+pydantic 
+numpy 
+pinecone-client
+python-dotenv
+unicorn
