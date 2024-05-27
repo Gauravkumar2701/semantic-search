@@ -84,6 +84,9 @@ async def search_docs(q: str):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+@app.get("/")
+async def checkWorking():
+    return JSONResponse({"message": "api is working"})
 
 if __name__ == "__main__":
     import uvicorn
