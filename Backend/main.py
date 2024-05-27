@@ -12,7 +12,7 @@ from database import add_document, search_documents
 
     
 # Initialize FastAPI app
-app = FastAPI()
+app = FastAPI(docs_url="/documentation", redoc_url=None)
 
 origins = ["*"]
 
@@ -76,7 +76,7 @@ async def upload(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.get("/search")
+@app.get("/docs")
 async def search_docs(q: str):
     try:
         results = search_documents(q, model, app.state.index)

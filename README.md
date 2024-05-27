@@ -141,3 +141,7 @@ curl -X POST "http://localhost:8000/upload" -F "file=@path/to/your/file.pdf"
 ```bash
 curl -X POST "http://localhost:8000/search?q={query that we have to do}"
 ```
+
+## Demo Video
+<!-- Watch the demo video [here](images/demo-video.mkv). -->
+[![Demo Video](https://img.youtube.com/vi/YFVzzwwTwfc/0.jpg)](https://youtu.be/YFVzzwwTwfc)
