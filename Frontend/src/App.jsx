@@ -20,10 +20,52 @@ function App() {
     console.log(event.target.value);
   };
 
+
+  const [file, setFile] = useState()
+
+  function handleFileChange(event) {
+    console.log(event.target.files[0])
+    setFile(event.target.files[0])
+  }
+  
+  async function handleFileSubmit(event) {
+    event.preventDefault()
+    const url = 'http://localhost:8000/upload';
+    const formData = new FormData();
+    formData.append('file', file);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    console.log(url, formData, config)
+    try{
+      const data = await axios.post(url, formData, config);
+      
+    }catch(err){
+       
+    }
+   
+    
+    
+  }
+
   return (
     <>
+
       <div className="heading">
         <h1>Semantic Search On Personalized Data</h1>
+      </div>
+
+      
+      <div className="upload-top">
+          <div className="upload-heading">
+            Upload the pdf here
+          </div>
+          <div className='file-upload'>
+            <input type="file" onChange={handleFileChange}/>
+            <button onClick={handleFileSubmit}>Upload</button>
+          </div>
       </div>
 
       <div className="search-box">
@@ -31,10 +73,19 @@ function App() {
         <button onClick={getData}>Search</button>
       </div>
 
-      <div className="answer-list">
+      <div className="content-box">
         {data.length != 0  ? (
-          data.map((item, index) => <div key={index}>{item.id}</div>)
-        ) : ( 
+          data.map((item, index) =>  (
+            <div>
+            <div className="file-name">
+                {item.id} 
+            </div>
+            <div className="file-score">
+              {item.score}
+            </div>i
+
+            </div>
+          ))) : ( 
           <p>No data to display.</p>
         )}
       </div>

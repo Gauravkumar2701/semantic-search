@@ -2,6 +2,20 @@
   text-align: center;
 }
 
+.file-upload{
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.upload-heading{
+  text-align: center;
+  font-size: 30px;
+}
+
+.upload-top{
+  padding-top: 20px;
+}
 
 .search-box{
   display: flex;
@@ -10,9 +24,23 @@
   margin-top: 100px;
 }
 
-
 .answer-list{ 
   text-align: center;
   padding-top: 100px;
   gap: 100px
 }
+
+
+.content-box div{
+  display: flex;
+  justify-content: center;
+  gap: 20px
+}
+
+.content-box{
+  padding-top: 100px;
+  text-align: center;
+  font-size: 25px
+}
+
+

@@ -1,24 +1,26 @@
 ## Semantic Search Assignment: Summer 2024
 
-This repo contain the frontend and backend of Semantic Search Assignment. Frontend code is reside on the frontend folder of and main.py have all the backend code.
+This repository contains the frontend and backend of the Semantic Search Assignment. The frontend code resides in the `Frontend` folder and Backend code reside on `Backend` folder
 
-This web application is designed to query on the document alread upload on the database(which is in this case is pinecone vector db). The frontend provide you the ui to upload the pdf and a search box to ask you query and based on the query it will give you the document that are mostly related to that.
-
+This web application is designed to query documents already uploaded to the database (in this case, the Pinecone vector DB). The frontend provides a UI to upload PDFs and a search box to enter your query. Based on the query, it will return the documents that are most relevant.
 
 ## Architecture Diagram
 
-![Alt text](images/semantic-diagram.png)
+![Alt text](images/semantic.png)
 
 
 
 
 ## How to run code 
 
+#### Note :
+1. For the sake of easy implementation, I have hard-coded the Pinecone API key. 
+
 ### Running the application from source code
 
 ```bash
 # Clone the repository
-git clone repository-url
+git clone https://github.com/Gauravkumar2701/semantic-search.git
 
 # Change the directory
 cd semantic-search
@@ -29,6 +31,8 @@ pip install -r requirements.txt
 # Run the fast api server
 fastapi dev main.py
 
+# Backend start on the port 8080
+
 # To run frontend
 cd Frontend
 
@@ -37,6 +41,8 @@ npm install
 
 # Run the frontend
 npm run dev
+
+# Frontend starts on the port 8000
 ```
 
 
@@ -45,7 +51,7 @@ npm run dev
 
 ```bash
 # Clone the repository
-git clone repository-name
+git clone https://github.com/Gauravkumar2701/semantic-search.git
 
 # Changing the directory to code
 cd semantic-search
@@ -53,24 +59,7 @@ cd semantic-search
 # Building the docker image
 sudo docker-compose up --build
 
-```
-
-
-
-### Using prebuild docker image from docker hub.
-
-```bash
-# NOTE :- Here we need configure the network because frontend uses the backend as the host name to make call to the backend so we need make our backend with that name.
-
-# Pull the docker pre-build image from my account
-docker pull monster2701/semantic-search-frontend
-docker pull monster2701/semantic-search-backend
-
-# Create a container from the frontend image
-sudo docker run -it -d -p 8080:8080 --name container-name image-name-frontend
-
-# Create a container from the backend image
-sudo docker run -it -d -p 8000:8000 --name container-name image-name-backend
+# Frontend run on the port 8080 and backend on port 8000
 
 ```
 
@@ -134,13 +123,15 @@ curl -X POST "http://localhost:8000/upload" -F "file=@path/to/your/file.pdf"
 {
   "results": [
     {
-      "filename": "my_document.pdf",
-      "score": 0.85,  // Optional relevance score
+      "id": "my_document.pdf",
+      "score": 0.85, 
       "metadata": {}
     },
     {
-      "filename": "another_document.pdf",
-      "score": 0.72,  // Optional relevance score
+      "id": "another_document.pdf",
+      "score": 0.72,
+      "metadata": {}
+
     }
   ]
 }

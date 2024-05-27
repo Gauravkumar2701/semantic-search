@@ -8,11 +8,7 @@ import os
 from fastapi.middleware.cors import CORSMiddleware
 from model import Document
 from utils import clean_text, extract_text_from_pdf
-
-from dotenv import load_dotenv
-
-load_dotenv()
-
+from database import add_document, search_documents
 
     
 # Initialize FastAPI app
@@ -34,7 +30,7 @@ model = SentenceTransformer("all-mpnet-base-v2")
 
 from pinecone import Pinecone, ServerlessSpec
 
-pc = Pinecone(os.getenv("PINECONE_API"))
+pc = Pinecone('ea6c376f-912e-47a1-bdf2-f276839073f7')
 
 # Define the index name
 index_name = 'quickstart'
@@ -52,13 +48,6 @@ if index_name not in pc.list_indexes().names():
     ) 
 
 app.state.index = pc.Index(index_name)
-
-
-
-@app.get("/docs")
-async def custom_docs():
-    return Response(content="This is my custom /docs endpoint", media_type="text/plain")
-
 
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
@@ -99,3 +88,4 @@ async def search_docs(q: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
